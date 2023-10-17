@@ -94,6 +94,6 @@ async function checkAccuracy() {
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
   speechSynthesis.speak(speechMessage);
-}
+
 }
 
