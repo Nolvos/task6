@@ -49,6 +49,11 @@ function checkAccuracy() {
 
   // ... (rest of the code for calculating accuracy)
 
+  // Display the opposite story accuracy
+  const oppositeAccuracy = 100 - accuracy;
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+
   // Determine the feedback based on accuracy
   let feedback = '';
   if (oppositeAccuracy >= 75) {
