@@ -80,9 +80,20 @@ async function checkAccuracy() {
   const accuracyResultElement = document.getElementById('accuracyResult');
   accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 
-  // Convert accuracy result to speech
+  // Determine the feedback based on accuracy
+  let feedback = '';
+  if (oppositeAccuracy >= 75) {
+    feedback = 'Excellent';
+  } else if (oppositeAccuracy >= 50) {
+    feedback = 'Very Good';
+  } else {
+    feedback = 'Let\'s try again.';
+  }
+
+  // Convert feedback to speech
   const speechSynthesis = window.speechSynthesis;
-  const speechMessage = new SpeechSynthesisUtterance(`Accuracy result is ${oppositeAccuracy.toFixed(2)}%.`);
+  const speechMessage = new SpeechSynthesisUtterance(feedback);
   speechSynthesis.speak(speechMessage);
+}
 }
 
