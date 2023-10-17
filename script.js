@@ -47,30 +47,30 @@ function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   console.log('Spoken text:', spokenText);
 
-   const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story content:', storyContent);
+  const storyContent = stories[currentStoryIndex].content.toLowerCase();
+  console.log('Story content:', storyContent);
 
-    const spokenWords = spokenText.split(' ');
-    console.log('Spoken words:', spokenWords);
+  const spokenWords = spokenText.split(' ');
+  console.log('Spoken words:', spokenWords);
 
-    const storyWords = storyContent.split(' ');
-    console.log('Story words:', storyWords);
+  const storyWords = storyContent.split(' ');
+  console.log('Story words:', storyWords);
 
-    let matchedWords = 0;
+  let matchedWords = 0;
 
-    // Count the number of words that match between spoken text and story content (case-insensitive)
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
-            matchedWords++;
-        }
+  // Count the number of words that match between spoken text and story content (case-insensitive)
+  for (const spokenWord of spokenWords) {
+    const normalizedSpokenWord = spokenWord.toLowerCase();
+    if (storyWords.includes(normalizedSpokenWord)) {
+      matchedWords++;
     }
+  }
 
-   const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
-    const accuracy = (matchedWords / totalWords) * 100;
-    console.log('Matched words:', matchedWords);
-    console.log('Total words:', totalWords);
-    console.log('Accuracy:', accuracy);
+  const totalWords = storyWords.length;  // Total words in the story
+  const accuracy = (matchedWords / totalWords) * 100;
+  console.log('Matched words:', matchedWords);
+  console.log('Total words:', totalWords);
+  console.log('Accuracy:', accuracy);
 
   // Display the opposite story accuracy
   const oppositeAccuracy = 100 - accuracy;
@@ -87,14 +87,16 @@ function checkAccuracy() {
     feedback = 'Let\'s try again.';
   }
 
-  // Convert feedback to speech
+  // Convert feedback to speech with kid-friendly voice
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
+  speechMessage.pitch = 1.5; // Higher pitch for a playful voice
+  speechMessage.rate = 1.5; // Faster rate of speech for a playful voice
   speechSynthesis.speak(speechMessage);
 }
 
 function readStory() {
-  const storyContent = document.getElementById('story-content').innerText;
+  const storyContent = stories[currentStoryIndex].content;
 
   // Check if the story content is empty
   if (!storyContent.trim()) {
@@ -104,6 +106,8 @@ function readStory() {
 
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(storyContent);
+  speechMessage.pitch = 1.5; // Higher pitch for a playful voice
+  speechMessage.rate = 1.5; // Faster rate of speech for a playful voice
 
   // Start reading the story content
   speechSynthesis.speak(speechMessage);
