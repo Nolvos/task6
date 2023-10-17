@@ -86,7 +86,7 @@ def calculate_accuracy():
 
     # Return the accuracy with appropriate CORS headers
     response = jsonify({'accuracy': accuracy})
-    response.headers.add('Access-Control-Allow-Origin', 'https://task5-omega.vercel.app')
+    response.headers.add('Access-Control-Allow-Origin', 'https://task6-tawny.vercel.app')
     return response
 
 
@@ -108,7 +108,7 @@ from flask_cors import CORS
 from difflib import SequenceMatcher
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://task5-omega.vercel.app"}})
+CORS(app, resources={r"/api/*": {"origins": "https://task6-tawny.vercel.app"}})
 # Constants
 DATA_DIR = "/content/drive/MyDrive/Speech_Accent/recordings"
 MAX_FEATURE_LENGTH = 2000  # Maximum length for padding/truncating
@@ -182,7 +182,7 @@ def calculate_accuracy():
 
     # Return the accuracy with appropriate CORS headers
     response = jsonify({'accuracy': accuracy})
-    response.headers.add('Access-Control-Allow-Origin', 'https://task5-omega.vercel.app')
+    response.headers.add('Access-Control-Allow-Origin', 'https://task6-tawny.vercel.app')
     return response
 
 
