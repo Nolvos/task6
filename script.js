@@ -13,10 +13,11 @@ const stories = [
 let currentStoryIndex = 0;
 
 function displayNextStory() {
-  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
+
+  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
@@ -76,16 +77,15 @@ function checkAccuracy() {
   console.log('Total words:', totalWords);
   console.log('Accuracy:', accuracy);
 
-  // Display the opposite story accuracy
-  const oppositeAccuracy = 100 - accuracy;
+  // Display the accuracy for the current story
   const accuracyResultElement = document.getElementById('accuracyResult');
-  accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+  accuracyResultElement.innerText = `Accuracy Result for "${stories[currentStoryIndex].title}": ${accuracy.toFixed(2)}%`;
 
   // Determine the feedback based on accuracy
   let feedback = '';
-  if (oppositeAccuracy >= 75) {
+  if (accuracy >= 75) {
     feedback = 'Excellent';
-  } else if (oppositeAccuracy >= 50) {
+  } else if (accuracy >= 50) {
     feedback = 'Very Good';
   } else {
     feedback = 'Let\'s try again.';
@@ -94,8 +94,8 @@ function checkAccuracy() {
   // Convert feedback to a playful, kid-friendly voice
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
-  speechMessage.pitch = 1.5;
-  speechMessage.rate = 1.5;
+  speechMessage.pitch = 2;
+  speechMessage.rate = 0.8;
   speechSynthesis.speak(speechMessage);
 }
 
@@ -110,8 +110,8 @@ function readStory() {
 
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(storyContent);
-  speechMessage.pitch = 1.5;
-  speechMessage.rate = 1.5;
+  speechMessage.pitch = 2;
+  speechMessage.rate = 0.8;
 
   // Start reading the story content
   speechSynthesis.speak(speechMessage);
