@@ -47,7 +47,30 @@ function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   console.log('Spoken text:', spokenText);
 
-  // ... (rest of the code for calculating accuracy)
+   const storyContent = stories[currentStoryIndex].content.toLowerCase();
+    console.log('Story content:', storyContent);
+
+    const spokenWords = spokenText.split(' ');
+    console.log('Spoken words:', spokenWords);
+
+    const storyWords = storyContent.split(' ');
+    console.log('Story words:', storyWords);
+
+    let matchedWords = 0;
+
+    // Count the number of words that match between spoken text and story content (case-insensitive)
+    for (const spokenWord of spokenWords) {
+        const normalizedSpokenWord = spokenWord.toLowerCase();
+        if (storyWords.includes(normalizedSpokenWord)) {
+            matchedWords++;
+        }
+    }
+
+   const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
+    const accuracy = (matchedWords / totalWords) * 100;
+    console.log('Matched words:', matchedWords);
+    console.log('Total words:', totalWords);
+    console.log('Accuracy:', accuracy);
 
   // Display the opposite story accuracy
   const oppositeAccuracy = 100 - accuracy;
