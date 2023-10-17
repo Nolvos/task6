@@ -91,9 +91,15 @@ function checkAccuracy() {
     feedback = 'Let\'s try again.';
   }
 
-  // Convert feedback to a playful, kid-friendly voice
+  // Convert feedback to a playful, kid-friendly voice (female)
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
+  
+  // Set a feminine voice if available, else use default
+  const voices = speechSynthesis.getVoices();
+  const femaleVoice = voices.find(voice => voice.name.includes('female'));
+  speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
+  
   speechMessage.pitch = 2;
   speechMessage.rate = 0.8;
   speechSynthesis.speak(speechMessage);
@@ -110,6 +116,12 @@ function readStory() {
 
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(storyContent);
+
+  // Set a feminine voice if available, else use default
+  const voices = speechSynthesis.getVoices();
+  const femaleVoice = voices.find(voice => voice.name.includes('female'));
+  speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
+
   speechMessage.pitch = 2;
   speechMessage.rate = 0.8;
 
