@@ -45,36 +45,20 @@ recognition.onerror = (event) => {
 };
 
 async function checkAccuracy() {
-    const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
-    console.log('Spoken text:', spokenText);
+  const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
+  console.log('Spoken text:', spokenText);
 
-    const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story content:', storyContent);
+  // ... (rest of the code for calculating accuracy)
 
-    const spokenWords = spokenText.split(' ');
-    console.log('Spoken words:', spokenWords);
+  // Display the opposite story accuracy
+  const oppositeAccuracy = 100 - accuracy;
 
-    const storyWords = storyContent.split(' ');
-    console.log('Story words:', storyWords);
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
 
-    let matchedWords = 0;
-
-    // Count the number of words that match between spoken text and story content (case-insensitive)
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
-            matchedWords++;
-        }
-    }
-
-    const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
-    const accuracy = (matchedWords / totalWords) * 100;
-    console.log('Matched words:', matchedWords);
-    console.log('Total words:', totalWords);
-    console.log('Accuracy:', accuracy);
-
-    // Display the opposite story accuracy
-    const oppositeAccuracy = 100 - accuracy;
-
-    document.getElementById('accuracyResult').innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+  // Convert accuracy result to speech
+  const speechSynthesis = window.speechSynthesis;
+  const speechMessage = new SpeechSynthesisUtterance(`Accuracy result is ${oppositeAccuracy.toFixed(2)}%.`);
+  speechSynthesis.speak(speechMessage);
 }
+
