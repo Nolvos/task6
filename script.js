@@ -13,14 +13,13 @@ const stories = [
 let currentStoryIndex = 0;
 
 function displayNextStory() {
+  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
-
-  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
 }
 
 // Display the first story initially
@@ -44,41 +43,11 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 
-async function checkAccuracy() {
+function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   console.log('Spoken text:', spokenText);
 
-      const storyContent = stories[currentStoryIndex].content.toLowerCase();
-    console.log('Story content:', storyContent);
-
-    const spokenWords = spokenText.split(' ');
-    console.log('Spoken words:', spokenWords);
-
-    const storyWords = storyContent.split(' ');
-    console.log('Story words:', storyWords);
-
-    let matchedWords = 0;
-
-    // Count the number of words that match between spoken text and story content (case-insensitive)
-    for (const spokenWord of spokenWords) {
-        const normalizedSpokenWord = spokenWord.toLowerCase();
-        if (storyWords.includes(normalizedSpokenWord)) {
-            matchedWords++;
-        }
-    }
-
-    const totalWords = Math.max(spokenWords.length, storyWords.length);  // Take the maximum number of words
-    const accuracy = (matchedWords / totalWords) * 100;
-    console.log('Matched words:', matchedWords);
-    console.log('Total words:', totalWords);
-    console.log('Accuracy:', accuracy);
-
-
-  // Display the opposite story accuracy
-  const oppositeAccuracy = 100 - accuracy;
-
-  const accuracyResultElement = document.getElementById('accuracyResult');
-  accuracyResultElement.innerText = `Accuracy Result: ${oppositeAccuracy.toFixed(2)}%`;
+  // ... (rest of the code for calculating accuracy)
 
   // Determine the feedback based on accuracy
   let feedback = '';
@@ -94,6 +63,20 @@ async function checkAccuracy() {
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
   speechSynthesis.speak(speechMessage);
-
 }
 
+function readStory() {
+  const storyContent = document.getElementById('story-content').innerText;
+
+  // Check if the story content is empty
+  if (!storyContent.trim()) {
+    console.log('No story content to read.');
+    return;
+  }
+
+  const speechSynthesis = window.speechSynthesis;
+  const speechMessage = new SpeechSynthesisUtterance(storyContent);
+
+  // Start reading the story content
+  speechSynthesis.speak(speechMessage);
+}
