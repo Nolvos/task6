@@ -20,6 +20,10 @@ function displayNextStory() {
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
+
+  // Reset accuracy result when story changes
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = 'Accuracy Result: ';
 }
 
 // Display the first story initially
@@ -87,11 +91,11 @@ function checkAccuracy() {
     feedback = 'Let\'s try again.';
   }
 
-  // Convert feedback to speech with kid-friendly voice
+  // Convert feedback to a playful, kid-friendly voice
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
-  speechMessage.pitch = 1.5; // Higher pitch for a playful voice
-  speechMessage.rate = 1.5; // Faster rate of speech for a playful voice
+  speechMessage.pitch = 1.5;
+  speechMessage.rate = 1.5;
   speechSynthesis.speak(speechMessage);
 }
 
@@ -106,8 +110,8 @@ function readStory() {
 
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(storyContent);
-  speechMessage.pitch = 1.5; // Higher pitch for a playful voice
-  speechMessage.rate = 1.5; // Faster rate of speech for a playful voice
+  speechMessage.pitch = 1.5;
+  speechMessage.rate = 1.5;
 
   // Start reading the story content
   speechSynthesis.speak(speechMessage);
