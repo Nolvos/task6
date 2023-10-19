@@ -17,7 +17,7 @@ const stories = [
       {
         text: 'Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and died.',
         image: 'lion_rabbit_picture1.jpg'
-      },
+      }
   // Add more stories in a similar format
 ];
 
