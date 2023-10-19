@@ -27,11 +27,20 @@ function displayNextStory() {
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
+  const storyImage = document.getElementById('story-image');
 
   currentStoryIndex = (currentStoryIndex + 1) % stories.length;
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
+
+  // Display the image for the current story
+  if (stories[currentStoryIndex].image) {
+    storyImage.src = stories[currentStoryIndex].image;
+    storyImage.style.display = 'block';
+  } else {
+    storyImage.style.display = 'none';
+  }
 
   // Reset accuracy result when story changes
   const accuracyResultElement = document.getElementById('accuracyResult');
