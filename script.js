@@ -35,8 +35,12 @@ function displayCurrentPart() {
 
   // Display the image for the current story
   if (story.image) {
-    storyImage.src = story.image;
-    storyImage.style.display = 'block';
+    const imageElement = new Image();
+    imageElement.src = story.image;
+    imageElement.onload = () => {
+      storyImage.src = imageElement.src;
+      storyImage.style.display = 'block';
+    };
   } else {
     storyImage.style.display = 'none';
   }
