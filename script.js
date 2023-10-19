@@ -42,22 +42,20 @@ displayNextStory();
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
-recognition.continuous = true; // Set continuous to true
-recognition.interimResults = true;
-
-let isListening = false;  // Track if recognition is running
 
 document.getElementById('startRecording').addEventListener('click', () => {
-  if (isListening) {
-    // If recognition is running, stop it
-    recognition.stop();
-    isListening = false;
-  } else {
-    // If recognition is not running, start it
-    recognition.start();
-    isListening = true;
-  }
+  recognition.start();
 });
+
+recognition.onresult = (event) => {
+  const spokenText = event.results[0][0].transcript;
+  console.log('Spoken text:', spokenText);
+  document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
+};
+
+recognition.onerror = (event) => {
+  console.error('Speech recognition error:', event.error);
+};
 
 
 recognition.onresult = (event) => {
