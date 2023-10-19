@@ -1,6 +1,6 @@
 const stories = [
   {
-    title: 'The Lion and the Rabbit',
+    title: 'The Lion and the Rabbit Part 1',
     content: `Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell, that daily one of them will come to him for his meal.`,
   },
   {
