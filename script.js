@@ -42,13 +42,21 @@ displayNextStory();
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
-
-// Set continuous and interimResults properties to true
-recognition.continuous = true;
+recognition.continuous = true; // Set continuous to true
 recognition.interimResults = true;
 
+let isListening = false;  // Track if recognition is running
+
 document.getElementById('startRecording').addEventListener('click', () => {
-  recognition.start();
+  if (isListening) {
+    // If recognition is running, stop it
+    recognition.stop();
+    isListening = false;
+  } else {
+    // If recognition is not running, start it
+    recognition.start();
+    isListening = true;
+  }
 });
 
 
