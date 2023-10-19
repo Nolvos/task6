@@ -1,9 +1,9 @@
 const stories = [
-    {
+  {
     title: 'The Lion and the Rabbit Part 4',
     content: `Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and dies.`,
   },
-{
+  {
     title: 'The Lion and the Rabbit Part 1',
     content: `Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell, that daily one of them will come to him for his meal.`,
   },
@@ -15,7 +15,6 @@ const stories = [
     title: 'The Lion and the Rabbit Part 3',
     content: `Now he plans to kill the lion and save himself. He went to the lion and told him that, there is another lion who claims to be more powerful than him.`,
   },
-
   // Add more stories in a similar format
 ];
 
@@ -42,32 +41,34 @@ displayNextStory();
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
+recognition.continuous = true;  // Listen continuously
+recognition.interimResults = true;
+
+let isListening = false;  // Track if recognition is running
 
 document.getElementById('startRecording').addEventListener('click', () => {
-  recognition.start();
+  toggleRecognition();
 });
 
-recognition.onresult = (event) => {
-  const spokenText = event.results[0][0].transcript;
-  console.log('Spoken text:', spokenText);
-  document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
-};
+document.getElementById('pauseContinueRecording').addEventListener('click', () => {
+  toggleRecognition();
+});
 
-recognition.onerror = (event) => {
-  console.error('Speech recognition error:', event.error);
-};
+function toggleRecognition() {
+  const pauseContinueButton = document.getElementById('pauseContinueRecording');
 
-
-recognition.onresult = (event) => {
-  const spokenText = event.results[0][0].transcript;
-  console.log('Spoken text:', spokenText);
-  document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
-};
-
-recognition.onerror = (event) => {
-  console.error('Speech recognition error:', event.error);
-};
-
+  if (isListening) {
+    // If recognition is running, pause it
+    recognition.stop();
+    isListening = false;
+    pauseContinueButton.innerText = 'Continue'; // Change the button text to "Continue"
+  } else {
+    // If recognition is not running, continue
+    recognition.start();
+    isListening = true;
+    pauseContinueButton.innerText = 'Pause'; // Change the button text back to "Pause"
+  }
+}
 
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
@@ -115,12 +116,12 @@ function checkAccuracy() {
   // Convert feedback to a playful, kid-friendly voice (female)
   const speechSynthesis = window.speechSynthesis;
   const speechMessage = new SpeechSynthesisUtterance(feedback);
-  
+
   // Set a feminine voice if available, else use default
   const voices = speechSynthesis.getVoices();
   const femaleVoice = voices.find(voice => voice.name.includes('female'));
   speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
-  
+
   speechMessage.pitch = 2;
   speechMessage.rate = 0.8;
   speechSynthesis.speak(speechMessage);
