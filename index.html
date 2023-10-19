@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Very Short Stories with Morals</title>
+  <title>Story Teller</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="app">
-    <h1>Very Short Stories with Morals</h1>
+    <h1>Story Teller</h1>
 
-    <!-- Display each story as a card -->
-    <div id="story-card" class="story-card">
+    <!-- Story Part Display -->
+    <div id="story-card">
       <h2 id="story-title"></h2>
       <p id="story-content"></p>
-      <button onclick="readStory()">Read Story</button>
-      <button onclick="displayNextStory()">Next Story</button>
+      <img id="story-image" src="" alt="Story Image">
     </div>
 
-    <!-- Open Mic feature -->
+    <!-- Navigation and Actions -->
+    <div id="controls">
+      <button id="prevPart">Previous Part</button>
+      <button id="nextPart">Next Part</button>
+      <button id="readStory">Read Story</button>
+    </div>
+
+    <!-- Start Recording (Speech Recognition) -->
     <button id="startRecording">Start Recording</button>
     <p id="spokenText">Spoken Text: </p>
 
-    <!-- Check Accuracy button -->
-    <button id="checkAccuracy" onclick="checkAccuracy()">Check Accuracy</button>
+    <!-- Check Accuracy -->
+    <button id="checkAccuracy">Check Accuracy</button>
     <p id="accuracyResult">Accuracy Result: </p>
   </div>
 
