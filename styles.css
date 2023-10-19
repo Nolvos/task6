@@ -30,6 +30,9 @@ button {
   margin-top: 20px;
 }
 
-#story-card img {
-  margin: 0 auto;
+.story-image {
+  max-width: 300px; 
+  max-height: 200px;
+  width: auto;
+  height: auto;
 }
