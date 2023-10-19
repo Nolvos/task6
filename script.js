@@ -54,8 +54,15 @@ recognition.onresult = (event) => {
   document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
 
-recognition.onerror = (event) => {
-  console.error('Speech recognition error:', event.error);
+recognition.onresult = (event) => {
+  const finalTranscript = event.results[event.results.length - 1][0].transcript;
+  
+  if (event.results[0].isFinal) {
+    spokenText += finalTranscript + ' ';
+  }
+  
+  console.log('Spoken text:', spokenText);
+  document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
 
 document.getElementById('startRecording').addEventListener('click', () => {
