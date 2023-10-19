@@ -22,13 +22,32 @@ const stories = [
 ];
 
 let currentStoryIndex = 0;
+let currentPartIndex = 0;
 
-function displayNextStory() {
+function displayCurrentPart() {
+  const story = stories[currentStoryIndex];
+  const currentPart = story.parts[currentPartIndex];
+
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
+  const storyImage = document.getElementById('story-image');
 
-  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
+  storyTitle.innerText = story.title;
+  storyContent.innerText = currentPart.text;
+  storyImage.src = currentPart.image;
+}
+
+function displayNextPart() {
+  currentPartIndex = (currentPartIndex + 1) % stories[currentStoryIndex].parts.length;
+  displayCurrentPart();
+}
+
+function displayPrevPart() {
+  currentPartIndex = (currentPartIndex - 1 + stories[currentStoryIndex].parts.length) % stories[currentStoryIndex].parts.length;
+  displayCurrentPart();
+}
+
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
@@ -38,8 +57,14 @@ function displayNextStory() {
   accuracyResultElement.innerText = 'Accuracy Result: ';
 }
 
-// Display the first story initially
-displayNextStory();
+
+// Update the display when the page loads
+displayCurrentPart();
+
+// Event listeners for navigation and actions
+document.getElementById('nextPart').addEventListener('click', displayNextPart);
+document.getElementById('prevPart').addEventListener('click', displayPrevPart);
+document.getElementById('readStory').addEventListener('click', readStory);
 
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
