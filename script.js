@@ -19,6 +19,7 @@ const stories = [
 ];
 
 let currentStoryIndex = 0;
+displayNextStory();
 
 function displayNextStory() {
   const storyCard = document.getElementById('story-card');
