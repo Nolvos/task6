@@ -2,11 +2,13 @@ const stories = [
   {
     title: 'The Lion and the Rabbit Part 4',
     content: `Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and dies.`,
-  },
+    image: 'lion_rabbit_picture1.jpg',
+ },
   {
     title: 'The Lion and the Rabbit Part 1',
     content: `Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell, that daily one of them will come to him for his meal.`,
-  },
+    image: 'lion_rabbit_picture2.jpg',
+ },
   {
     title: 'The Lion and the Rabbit Part 2',
     content: `So, the Lion agreed and this started going for many days. One day, it was Rabbit’s turn. When he was on his way he saw a well.`,
@@ -17,6 +19,27 @@ const stories = [
   },
   // Add more stories in a similar format
 ];
+
+function displayCurrentPart() {
+  const story = stories[currentStoryIndex];
+  const currentPart = story.parts[currentPartIndex];
+
+  const storyCard = document.getElementById('story-card');
+  const storyTitle = document.getElementById('story-title');
+  const storyContent = document.getElementById('story-content');
+  const storyImage = document.getElementById('story-image');
+
+  storyTitle.innerText = story.title;
+  storyContent.innerText = currentPart.text;
+
+  // Display the image for the current story
+  if (story.image) {
+    storyImage.src = story.image;
+    storyImage.style.display = 'block';
+  } else {
+    storyImage.style.display = 'none';
+  }
+}
 
 let currentStoryIndex = 0;
 
