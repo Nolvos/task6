@@ -17,7 +17,9 @@ const stories = [
       {
         text: 'Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and died.',
         image: 'lion_rabbit_picture1.jpg'
-      },
+      }
+    ]
+  }
   // Add more stories in a similar format
 ];
 
@@ -28,7 +30,6 @@ function displayCurrentPart() {
   const story = stories[currentStoryIndex];
   const currentPart = story.parts[currentPartIndex];
 
-  const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
   const storyImage = document.getElementById('story-image');
@@ -48,15 +49,13 @@ function displayPrevPart() {
   displayCurrentPart();
 }
 
-
-  storyTitle.innerText = stories[currentStoryIndex].title;
-  storyContent.innerText = stories[currentStoryIndex].content;
-
-  // Reset accuracy result when story changes
-  const accuracyResultElement = document.getElementById('accuracyResult');
-  accuracyResultElement.innerText = 'Accuracy Result: ';
+function readStory() {
+  // Implement reading the story
 }
 
+function checkAccuracy() {
+  // Implement checking accuracy
+}
 
 // Update the display when the page loads
 displayCurrentPart();
@@ -65,6 +64,8 @@ displayCurrentPart();
 document.getElementById('nextPart').addEventListener('click', displayNextPart);
 document.getElementById('prevPart').addEventListener('click', displayPrevPart);
 document.getElementById('readStory').addEventListener('click', readStory);
+document.getElementById('checkAccuracy').addEventListener('click', checkAccuracy);
+
 
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
