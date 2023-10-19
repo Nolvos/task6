@@ -12,6 +12,7 @@ const stories = [
   {
     title: 'The Lion and the Rabbit Part 2',
     content: `So, the Lion agreed and this started going for many days. One day, it was Rabbit’s turn. When he was on his way he saw a well.`,
+    image: 'lion_rabbit_picture3.jpg',
   },
   {
     title: 'The Lion and the Rabbit Part 3',
