@@ -46,8 +46,12 @@ recognition.interimResults = true;
 
 let isListening = false;  // Track if recognition is running
 
+let spokenText = '';  // Variable to store spoken text
+
 recognition.onresult = (event) => {
-  const spokenText = event.results[event.results.length - 1][0].transcript; // Get the last result
+  const interimTranscript = event.results[event.results.length - 1][0].transcript; // Get the last result
+  spokenText += interimTranscript + ' ';  // Append the recognized text
+
   console.log('Spoken text:', spokenText);
   document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
