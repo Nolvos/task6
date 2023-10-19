@@ -46,6 +46,16 @@ recognition.interimResults = true;
 
 let isListening = false;  // Track if recognition is running
 
+recognition.onresult = (event) => {
+  const spokenText = event.results[event.results.length - 1][0].transcript; // Get the last result
+  console.log('Spoken text:', spokenText);
+  document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
+};
+
+recognition.onerror = (event) => {
+  console.error('Speech recognition error:', event.error);
+};
+
 document.getElementById('startRecording').addEventListener('click', () => {
   toggleRecognition();
 });
