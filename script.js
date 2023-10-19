@@ -19,7 +19,6 @@ const stories = [
 ];
 
 let currentStoryIndex = 0;
-displayNextStory();
 
 function displayNextStory() {
   const storyCard = document.getElementById('story-card');
@@ -37,7 +36,7 @@ function displayNextStory() {
 }
 
 // Display the first story initially
-displayNextStory();
+// displayNextStory();
 
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
