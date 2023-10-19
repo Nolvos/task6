@@ -38,23 +38,36 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 
-function displayNextStory() {
+// Ensure that voices are loaded before using them
+window.speechSynthesis.onvoiceschanged = () => {
+  // Display the first story initially
+  displayStory(0);
+};
+
+function displayStory(index) {
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
 
-  storyTitle.innerText = stories[currentStoryIndex].title;
-  storyContent.innerText = stories[currentStoryIndex].content;
+  storyTitle.innerText = stories[index].title;
+  storyContent.innerText = stories[index].content;
 
   // Reset accuracy result when story changes
   const accuracyResultElement = document.getElementById('accuracyResult');
   accuracyResultElement.innerText = 'Accuracy Result: ';
 
-  currentStoryIndex = (currentStoryIndex + 1) % stories.length; // Move to the next story
+  currentStoryIndex = index;
 }
 
-// Display the first story initially
-displayNextStory();
+function displayNextStory() {
+  const nextIndex = (currentStoryIndex + 1) % stories.length;
+  displayStory(nextIndex);
+}
+
+function displayPreviousStory() {
+  const previousIndex = (currentStoryIndex - 1 + stories.length) % stories.length;
+  displayStory(previousIndex);
+}
 
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
