@@ -41,31 +41,13 @@ displayNextStory();
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
-recognition.continuous = true;  // Listen continuously
-recognition.interimResults = true;
 
-let isListening = false;  // Track if recognition is running
-let spokenText = '';  // Variable to store spoken text
-
-// Event listeners for recording and buttons
 document.getElementById('startRecording').addEventListener('click', () => {
-  toggleRecognition();
-});
-
-document.getElementById('pauseContinueRecording').addEventListener('click', () => {
-  toggleRecognition();
+  recognition.start();
 });
 
 recognition.onresult = (event) => {
-  const finalTranscript = event.results[event.results.length - 1][0].transcript;
-
-  if (event.results[0].isFinal) {
-    spokenText += finalTranscript + ' ';
-  } else {
-    const interimTranscript = event.results[event.results.length - 1][0].transcript;
-    spokenText += interimTranscript + ' ';
-  }
-
+  const spokenText = event.results[0][0].transcript;
   console.log('Spoken text:', spokenText);
   document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
@@ -74,13 +56,6 @@ recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
 
-document.getElementById('startRecording').addEventListener('click', () => {
-  toggleRecognition();
-});
-
-document.getElementById('pauseContinueRecording').addEventListener('click', () => {
-  toggleRecognition();
-});
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   console.log('Spoken text:', spokenText);
