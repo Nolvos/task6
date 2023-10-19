@@ -18,7 +18,11 @@ const stories = [
   // Add more stories in a similar format
 ];
 
-let currentStoryIndex = 0;
+let currentStoryIndex = 0; // Set currentStoryIndex to 0
+
+// Display the first story initially
+currentStoryIndex = 0; // Set it to 0 before calling displayNextStory
+displayNextStory();
 
 function displayNextStory() {
   const storyCard = document.getElementById('story-card');
