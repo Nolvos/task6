@@ -29,3 +29,7 @@ button {
 #spokenText {
   margin-top: 20px;
 }
+
+#story-card img {
+  margin: 0 auto;
+}
