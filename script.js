@@ -28,24 +28,19 @@ function displayCurrentPart() {
   const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
-  const storyImage = document.getElementById('story-image');
+  const storyImage = document.getElementById('story-image'); // Add this line
 
   storyTitle.innerText = story.title;
   storyContent.innerText = currentPart.text;
 
   // Display the image for the current story
   if (story.image) {
-    const imageElement = new Image();
-    imageElement.src = story.image;
-    imageElement.onload = () => {
-      storyImage.src = imageElement.src;
-      storyImage.style.display = 'block';
-    };
+    storyImage.src = story.image; // Set the image source
+    storyImage.style.display = 'block';
   } else {
     storyImage.style.display = 'none';
   }
 }
-
 let currentStoryIndex = 0;
 
 function displayNextStory() {
