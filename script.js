@@ -1,71 +1,34 @@
 const stories = [
   {
     title: 'The Lion and the Rabbit',
-    parts: [
-      {
-        text: 'Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell that daily one of them will come to him for his meal.',
-        image: 'lion_rabbit_picture1.jpg'
-      },
-      {
-        text: 'So, the Lion agreed and this started going for many days. One day, it was Rabbit’s turn. When he was on his way he saw a well.',
-        image: 'lion_rabbit_picture2.jpg'
-      },
-      {
-        text: 'Now he plans to kill the lion and save himself. He went to the lion and told him that there is another lion who claims to be more powerful than him.',
-        image: 'lion_rabbit_picture3.jpg'
-      },
-      {
-        text: 'Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and died.',
-        image: 'lion_rabbit_picture1.jpg'
-      }
-    ]
-  }
+    content: `Once there was a Lion in the jungle`,
+  },
+  {
+    title: 'The Hunter and the Pigeons',
+    content: `One day a hunter sets a net to catch birds`,
+  },
   // Add more stories in a similar format
 ];
 
 let currentStoryIndex = 0;
-let currentPartIndex = 0;
 
-function displayCurrentPart() {
-  const story = stories[currentStoryIndex];
-  const currentPart = story.parts[currentPartIndex];
-
+function displayNextStory() {
+  const storyCard = document.getElementById('story-card');
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
-  const storyImage = document.getElementById('story-image');
 
-  storyTitle.innerText = story.title;
-  storyContent.innerText = currentPart.text;
-  storyImage.src = currentPart.image;
+  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
+
+  storyTitle.innerText = stories[currentStoryIndex].title;
+  storyContent.innerText = stories[currentStoryIndex].content;
+
+  // Reset accuracy result when story changes
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = 'Accuracy Result: ';
 }
 
-function displayNextPart() {
-  currentPartIndex = (currentPartIndex + 1) % stories[currentStoryIndex].parts.length;
-  displayCurrentPart();
-}
-
-function displayPrevPart() {
-  currentPartIndex = (currentPartIndex - 1 + stories[currentStoryIndex].parts.length) % stories[currentStoryIndex].parts.length;
-  displayCurrentPart();
-}
-
-function readStory() {
-  // Implement reading the story
-}
-
-function checkAccuracy() {
-  // Implement checking accuracy
-}
-
-// Update the display when the page loads
-displayCurrentPart();
-
-// Event listeners for navigation and actions
-document.getElementById('nextPart').addEventListener('click', displayNextPart);
-document.getElementById('prevPart').addEventListener('click', displayPrevPart);
-document.getElementById('readStory').addEventListener('click', readStory);
-document.getElementById('checkAccuracy').addEventListener('click', checkAccuracy);
-
+// Display the first story initially
+displayNextStory();
 
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
