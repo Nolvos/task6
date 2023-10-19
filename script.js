@@ -1,7 +1,7 @@
 const stories = [
   {
     title: 'The Lion and the Rabbit',
-    content: `Once there was a Lion in the jungle`,
+    content: `Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell that daily one of them will come to him for his meal.`,
   },
   {
     title: 'The Hunter and the Pigeons',
@@ -18,6 +18,21 @@ function displayNextStory() {
   const storyContent = document.getElementById('story-content');
 
   currentStoryIndex = (currentStoryIndex + 1) % stories.length;
+
+  storyTitle.innerText = stories[currentStoryIndex].title;
+  storyContent.innerText = stories[currentStoryIndex].content;
+
+  // Reset accuracy result when story changes
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = 'Accuracy Result: ';
+}
+
+function displayPreviousStory() {
+  const storyCard = document.getElementById('story-card');
+  const storyTitle = document.getElementById('story-title');
+  const storyContent = document.getElementById('story-content');
+
+  currentStoryIndex = (currentStoryIndex - 1 + stories.length) % stories.length;
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
@@ -119,7 +134,7 @@ function readStory() {
 
   // Set a feminine voice if available, else use default
   const voices = speechSynthesis.getVoices();
-  const femaleVoice = voices.find(voice => voice.name includes('female'));
+  const femaleVoice = voices.find(voice => voice.name.includes('female'));
   speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
 
   speechMessage.pitch = 2;
