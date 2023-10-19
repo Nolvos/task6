@@ -43,6 +43,10 @@ displayNextStory();
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
 
+// Set continuous and interimResults properties to true
+recognition.continuous = true;
+recognition.interimResults = true;
+
 document.getElementById('startRecording').addEventListener('click', () => {
   recognition.start();
 });
@@ -56,6 +60,7 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
+
 
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
