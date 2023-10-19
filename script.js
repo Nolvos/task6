@@ -20,28 +20,6 @@ const stories = [
 
 let currentStoryIndex = 0; // Set currentStoryIndex to 0
 
-// Display the first story initially
-currentStoryIndex = 0; // Set it to 0 before calling displayNextStory
-displayNextStory();
-
-function displayNextStory() {
-  const storyCard = document.getElementById('story-card');
-  const storyTitle = document.getElementById('story-title');
-  const storyContent = document.getElementById('story-content');
-
-  currentStoryIndex = (currentStoryIndex + 1) % stories.length;
-
-  storyTitle.innerText = stories[currentStoryIndex].title;
-  storyContent.innerText = stories[currentStoryIndex].content;
-
-  // Reset accuracy result when story changes
-  const accuracyResultElement = document.getElementById('accuracyResult');
-  accuracyResultElement.innerText = 'Accuracy Result: ';
-}
-
-// Display the first story initially
-// displayNextStory();
-
 // Initialize speech recognition
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
@@ -59,6 +37,24 @@ recognition.onresult = (event) => {
 recognition.onerror = (event) => {
   console.error('Speech recognition error:', event.error);
 };
+
+function displayNextStory() {
+  const storyCard = document.getElementById('story-card');
+  const storyTitle = document.getElementById('story-title');
+  const storyContent = document.getElementById('story-content');
+
+  storyTitle.innerText = stories[currentStoryIndex].title;
+  storyContent.innerText = stories[currentStoryIndex].content;
+
+  // Reset accuracy result when story changes
+  const accuracyResultElement = document.getElementById('accuracyResult');
+  accuracyResultElement.innerText = 'Accuracy Result: ';
+
+  currentStoryIndex = (currentStoryIndex + 1) % stories.length; // Move to the next story
+}
+
+// Display the first story initially
+displayNextStory();
 
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
@@ -109,7 +105,7 @@ function checkAccuracy() {
   
   // Set a feminine voice if available, else use default
   const voices = speechSynthesis.getVoices();
-  const femaleVoice = voices.find(voice => voice.name.includes('female'));
+  const femaleVoice = voices.find(voice => voice.name.includes 'female');
   speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
   
   speechMessage.pitch = 2;
