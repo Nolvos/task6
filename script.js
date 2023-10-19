@@ -47,16 +47,25 @@ recognition.interimResults = true;
 let isListening = false;  // Track if recognition is running
 let spokenText = '';  // Variable to store spoken text
 
-// Initialize speech recognition
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = 'en-US';
-
+// Event listeners for recording and buttons
 document.getElementById('startRecording').addEventListener('click', () => {
-  recognition.start();
+  toggleRecognition();
+});
+
+document.getElementById('pauseContinueRecording').addEventListener('click', () => {
+  toggleRecognition();
 });
 
 recognition.onresult = (event) => {
-  const spokenText = event.results[0][0].transcript;
+  const finalTranscript = event.results[event.results.length - 1][0].transcript;
+
+  if (event.results[0].isFinal) {
+    spokenText += finalTranscript + ' ';
+  } else {
+    const interimTranscript = event.results[event.results.length - 1][0].transcript;
+    spokenText += interimTranscript + ' ';
+  }
+
   console.log('Spoken text:', spokenText);
   document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
