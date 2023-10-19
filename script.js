@@ -1,5 +1,9 @@
 const stories = [
-  {
+    {
+    title: 'The Lion and the Rabbit Part 4',
+    content: `Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and dies.`,
+  },
+{
     title: 'The Lion and the Rabbit Part 1',
     content: `Once there was a Lion in the jungle who used to kill 2-3 animals daily for his meal. All animals went to him to tell, that daily one of them will come to him for his meal.`,
   },
@@ -11,10 +15,7 @@ const stories = [
     title: 'The Lion and the Rabbit Part 3',
     content: `Now he plans to kill the lion and save himself. He went to the lion and told him that, there is another lion who claims to be more powerful than him.`,
   },
-  {
-    title: 'The Lion and the Rabbit Part 4',
-    content: `Then the lion asks the rabbit to take him to that lion. The rabbit takes him to the well and said he lives here. When the lion looked in the well he saw his own reflection and jumped in the well and dies.`,
-  },
+
   // Add more stories in a similar format
 ];
 
@@ -25,22 +26,7 @@ function displayNextStory() {
   const storyTitle = document.getElementById('story-title');
   const storyContent = document.getElementById('story-content');
 
-  storyTitle.innerText = stories[currentStoryIndex].title;
-  storyContent.innerText = stories[currentStoryIndex].content;
-
   currentStoryIndex = (currentStoryIndex + 1) % stories.length;
-
-  // Reset accuracy result when story changes
-  const accuracyResultElement = document.getElementById('accuracyResult');
-  accuracyResultElement.innerText = 'Accuracy Result: ';
-}
-
-function displayPreviousStory() {
-  const storyCard = document.getElementById('story-card');
-  const storyTitle = document.getElementById('story-title');
-  const storyContent = document.getElementById('story-content');
-
-  currentStoryIndex = (currentStoryIndex - 1 + stories.length) % stories.length;
 
   storyTitle.innerText = stories[currentStoryIndex].title;
   storyContent.innerText = stories[currentStoryIndex].content;
@@ -120,7 +106,7 @@ function checkAccuracy() {
   
   // Set a feminine voice if available, else use default
   const voices = speechSynthesis.getVoices();
-  const femaleVoice = voices.find(voice => voice.name.includes 'female'));
+  const femaleVoice = voices.find(voice => voice.name.includes('female'));
   speechMessage.voice = femaleVoice || voices[0]; // Use the first available voice if no feminine voice found
   
   speechMessage.pitch = 2;
