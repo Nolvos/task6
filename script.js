@@ -45,13 +45,11 @@ recognition.continuous = true;  // Listen continuously
 recognition.interimResults = true;
 
 let isListening = false;  // Track if recognition is running
-
 let spokenText = '';  // Variable to store spoken text
 
 recognition.onresult = (event) => {
   const interimTranscript = event.results[event.results.length - 1][0].transcript; // Get the last result
   spokenText += interimTranscript + ' ';  // Append the recognized text
-
   console.log('Spoken text:', spokenText);
   document.getElementById('spokenText').innerText = `Spoken Text: ${spokenText}`;
 };
@@ -67,23 +65,6 @@ document.getElementById('startRecording').addEventListener('click', () => {
 document.getElementById('pauseContinueRecording').addEventListener('click', () => {
   toggleRecognition();
 });
-
-function toggleRecognition() {
-  const pauseContinueButton = document.getElementById('pauseContinueRecording');
-
-  if (isListening) {
-    // If recognition is running, pause it
-    recognition.stop();
-    isListening = false;
-    pauseContinueButton.innerText = 'Continue'; // Change the button text to "Continue"
-  } else {
-    // If recognition is not running, continue
-    recognition.start();
-    isListening = true;
-    pauseContinueButton.innerText = 'Pause'; // Change the button text back to "Pause"
-  }
-}
-
 function checkAccuracy() {
   const spokenText = document.getElementById('spokenText').innerText.split(':')[1].trim().toLowerCase();
   console.log('Spoken text:', spokenText);
